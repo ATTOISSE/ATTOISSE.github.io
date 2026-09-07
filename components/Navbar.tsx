@@ -24,16 +24,16 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-ink/85 backdrop-blur-md border-b border-line" : "bg-transparent border-b border-transparent"
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${scrolled ? "bg-ink/85 backdrop-blur-md border-b border-line" : "bg-transparent border-b border-transparent"
+        }`}
     >
       <nav className="section-shell flex h-16 items-center justify-between">
         <a href="#hero" className="flex items-center gap-2 font-display text-sm font-semibold tracking-tight text-paper">
-          <span className="flex h-7 w-7 items-center justify-center rounded-sm border border-signal/50 text-signal">
-            AM
-          </span>
-          <span className="hidden sm:inline">Attoisse Mohamed</span>
+          <img
+            src="/logo.png"
+            alt="logo"
+            className="h-8 w-auto rounded-lg object-contain"
+          />
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">

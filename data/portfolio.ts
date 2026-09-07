@@ -155,7 +155,7 @@ export const projects: Project[] = [
     category: "Data Engineering",
     description:
       "Chaîne d'extraction, transformation et chargement conçue pour être rejouable et observable, avec gestion des erreurs et des schémas évolutifs.",
-    stack: ["Python", "ETL", "Airflow", "PostgreSQL"],
+    stack: ["Python", "ETL", "Airflow", "PostgreSQL","dbt"],
   },
   {
     id: "feature-store",
@@ -191,11 +191,11 @@ export const projects: Project[] = [
   },
   {
     id: "ksilog-curriculum",
-    title: "Programme Data & Software Engineering",
+    title: "Software Engineering",
     category: "Ksilog Academy",
     description:
-      "Conception d'un curriculum complet en Data et Software Engineering, du niveau débutant jusqu'à la mise en production.",
-    stack: ["Curriculum", "Python", "Java"],
+      "Formation complète en ingénierie logicielle  maîtrisez les fondamentaux de la programmation et la conception d'applications robustes",
+    stack: ["JavaScript", "Python", "Langage C"],
   },
 ];
 

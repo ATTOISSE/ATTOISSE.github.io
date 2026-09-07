@@ -109,47 +109,117 @@ function PipelineGraphic() {
       viewBox="0 0 620 520"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="opacity-90"
+      className="opacity-95"
     >
-      <g stroke="#1E2A2C" strokeWidth="1.5">
-        <path d="M40 120 H 280" />
-        <path d="M40 260 H 220" />
-        <path d="M40 400 H 300" />
-        <path d="M280 120 V 260" />
-        <path d="M220 260 V 260" />
-        <path d="M300 400 V 260" />
-        <path d="M280 260 H 460" />
-        <path d="M460 260 V 60" />
-        <path d="M460 260 V 460" />
+      <defs>
+        <linearGradient id="cyanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#2DD4A7" />
+          <stop offset="100%" stopColor="#4FB6E8" />
+        </linearGradient>
+        <filter id="shadow" x="-2" y="0" width="10" height="12">
+          <feDropShadow dx="0" dy="1" stdDeviation="1" floodColor="#0D1416" floodOpacity="0.5"/>
+        </filter>
+      </defs>
+
+      <g stroke="#1A2528" strokeWidth="0.5">
+        {Array.from({ length: 13 }).map((_, i) => (
+          <path key={`v-${i}`} d={`M${i * 50} 0 V520`} />
+        ))}
+        {Array.from({ length: 11 }).map((_, i) => (
+          <path key={`h-${i}`} d={`M0 ${i * 50} H620`} />
+        ))}
       </g>
-      <g stroke="#2DD4A7" strokeWidth="2" className="text-signal">
-        <path className="node-line animate-flow" d="M40 120 H 280 V 260 H 460 V 60" />
+
+      <rect x="250" y="50" width="120" height="420" rx="12" fill="#151D1F" stroke="#1E2A2C" strokeWidth="1.5" />
+      <path d="M310 120V410" stroke="#1E2A2C" strokeWidth="1.5" strokeDasharray="5 5" />
+
+      <g transform="translate(100, 150)">
+        <circle cx="60" cy="40" r="25" fill="#1A2528" stroke="#5C6968" strokeWidth="1.5" /> {/* Tête */}
+        <path d="M40 70C40 60 80 60 80 70V160H40V70Z" fill="#1A2528" stroke="#5C6968" strokeWidth="1.5" /> {/* Corps */}
+        <path d="M50 160V220H70V160H50Z" fill="#131C1E" stroke="#5C6968" strokeWidth="1"/> {/* Jambe visible */}
+        
+        <path d="M40 90H10V140H40V90Z" fill="#151D1F" stroke="#5C6968" strokeWidth="1"/> {/* Tablette main */}
+        <path d="M80 100H110V150H80V100Z" fill="#151D1F" stroke="#5C6968" strokeWidth="1"/> {/* Écran main */}
       </g>
-      <g stroke="#4FB6E8" strokeWidth="2">
-        <path className="node-line animate-flow" d="M40 400 H 300 V 260 H 460 V 460" />
+
+      
+      <g transform="translate(400, 0)">
+        <g transform="translate(0, 100)">
+          <path d="M0 0H70V50H0V0Z" fill="#151D1F" stroke="#1E2A2C" strokeWidth="1"/>
+          <text x="35" y="30" fontFamily="var(--font-mono)" fontSize="13" fill="#4FB6E8" textAnchor="middle">
+            Analyse
+          </text>
+        </g>
+        
+        <g transform="translate(0, 240)">
+          <rect x="-10" y="0" width="90" height="60" rx="8" fill="#151D1F" stroke="#2DD4A7" strokeWidth="2"/>
+          <text x="35" y="35" fontFamily="var(--font-mono)" fontSize="13" fill="#2DD4A7" textAnchor="middle">
+            Conception
+          </text>
+        </g>
+
+        <g transform="translate(0, 390)">
+          <circle cx="35" cy="30" r="35" fill="#151D1F" stroke="#1E2A2C" strokeWidth="1.5"/>
+          <text x="35" y="35" fontFamily="var(--font-mono)" fontSize="13" fill="url(#cyanGradient)" textAnchor="middle">
+            Production
+          </text>
+          <circle cx="35" cy="30" r="10" fill="none" stroke="#5C6968" strokeWidth="1" strokeDasharray="3 3"/>
+        </g>
       </g>
+
+      <path 
+        d="M110 265 H80 Q60 265 60 245 V125 Q60 105 80 105 H250 M370 120 H480" 
+        stroke="#4FB6E8" 
+        strokeWidth="2" 
+        strokeDasharray="6 3"
+        className="animate-flow-blue"
+      />
+
+      <path 
+        d="M210 275 H250 M370 260 H470" 
+        stroke="#2DD4A7" 
+        strokeWidth="2" 
+      />
+
+      <path 
+        d="M160 165 H200 Q220 165 220 185 V435 Q220 455 240 455 H250 M370 455 H480 Q515 455 515 425" 
+        stroke="url(#cyanGradient)" 
+        strokeWidth="2.5" 
+        strokeDasharray="8 4"
+        className="animate-flow-gradient"
+      />
 
       {[
-        { x: 40, y: 120 },
-        { x: 40, y: 260 },
-        { x: 40, y: 400 },
+        { y: 120, label: "D1", type: "in" },
+        { y: 190, label: "D2", type: "in" },
+        { y: 260, label: "D3", type: "main" },
+        { y: 340, label: "D4", type: "out" },
+        { y: 420, label: "D5", type: "out" },
       ].map((p, i) => (
-        <circle key={`src-${i}`} cx={p.x} cy={p.y} r="5" fill="#0D1416" stroke="#5C6968" strokeWidth="1.5" />
+        <g key={`node-${i}`} transform={`translate(310, ${p.y})`}>
+          <circle cx="0" cy="0" r="10" fill="#0D1416" stroke={p.type === 'main' ? '#2DD4A7' : '#1E2A2C'} strokeWidth="2" />
+          {p.type !== 'main' && (
+            <circle cx="0" cy="0" r="4" fill="#5C6968" stroke="#1E2A2C" strokeWidth="1" />
+          )}
+          <text x={p.type === 'in' ? -25 : 25} y="4" fontFamily="var(--font-mono)" fontSize="11" fill="#8FA09C" textAnchor={p.type === 'in' ? 'end' : 'start'}>
+            {p.label}
+          </text>
+        </g>
       ))}
-
-      <circle cx="460" cy="260" r="9" fill="#0D1416" stroke="#2DD4A7" strokeWidth="2" />
-      <circle cx="460" cy="60" r="6" fill="#0D1416" stroke="#4FB6E8" strokeWidth="1.5" />
-      <circle cx="460" cy="460" r="6" fill="#0D1416" stroke="#4FB6E8" strokeWidth="1.5" />
-
-      <text x="380" y="264" fontFamily="var(--font-mono)" fontSize="11" fill="#8FA09C">
-        Conception
-      </text>
-      <text x="390" y="64" fontFamily="var(--font-mono)" fontSize="11" fill="#8FA09C">
-        Analyse
-      </text>
-      <text x="380" y="464" fontFamily="var(--font-mono)" fontSize="11" fill="#8FA09C">
-        production
-      </text>
+    
+      <style>{`
+        @keyframes flow {
+          to {
+            stroke-dashoffset: -20;
+          }
+        }
+        .animate-flow-blue {
+          animation: flow 1.5s linear infinite;
+        }
+        .animate-flow-gradient {
+          animation: flow 1.2s linear infinite;
+        }
+      `}</style>
     </svg>
   );
 }

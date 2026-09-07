@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="border-t border-line bg-ink py-10">
       <div className="section-shell flex flex-col items-center justify-between gap-6 sm:flex-row">
         <p className="font-mono text-xs text-paper-faint">
-          © {year} {profile.name}. Conçu &amp; développé avec Next.js.
+          © 2024 {profile.name}
         </p>
 
         <div className="flex items-center gap-5">
